@@ -17,6 +17,8 @@ import { initConfig } from './config.js';
 import { initMcpLogger, sendMcpLog } from './mcpLogger.js';
 import { SEARCH_CONTEXT_TOOL } from './prompts/searchContext.js';
 import { searchContextTool } from './tools/searchContext.js';
+import { ENHANCE_PROMPT_TOOL } from './prompts/enhancePrompt.js';
+import { enhancePromptTool } from './tools/enhancePrompt.js';
 
 /**
  * 创建 MCP 服务器
@@ -47,6 +49,11 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
       description: SEARCH_CONTEXT_TOOL.description,
       inputSchema: SEARCH_CONTEXT_TOOL.inputSchema,
     },
+    {
+      name: ENHANCE_PROMPT_TOOL.name,
+      description: ENHANCE_PROMPT_TOOL.description,
+      inputSchema: ENHANCE_PROMPT_TOOL.inputSchema,
+    },
   ];
 
   return { tools };
@@ -61,6 +68,20 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
   try {
     if (name === 'search_context') {
       const result = await searchContextTool(args as { project_root_path?: string; query?: string });
+      return {
+        content: [
+          {
+            type: 'text',
+            text: result?.text || 'Error: No result returned',
+          },
+        ],
+      };
+    }
+
+    if (name === 'enhance_prompt') {
+      const result = await enhancePromptTool(
+        args as { project_root_path?: string; prompt?: string; conversation_history?: string }
+      );
       return {
         content: [
           {

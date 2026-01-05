@@ -1,5 +1,47 @@
+# 依赖
 node_modules/
+
+# 构建输出
 dist/
+
+# 项目数据目录
 .ace-tool/
+
+# 日志文件
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 系统文件
 .DS_Store
+Thumbs.db
+
+# IDE/编辑器
+.idea/
+.vscode/
+.history/
+.claude/
+*.swp
+*.swo
+*~
+
+# TypeScript
+*.tsbuildinfo
+
+# 环境变量
+.env
+.env.local
+.env.*.local
+
+# 测试覆盖率
+coverage/
+
+# 临时文件
+*.tmp
+*.temp
+.cache/
+
+# VSIX 插件包
+*.vsix
+augment-plugin/

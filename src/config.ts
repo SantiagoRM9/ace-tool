@@ -215,3 +215,31 @@ export function getConfig(): Config {
   }
   return config;
 }
+
+/**
+ * 获取文本扩展名集合
+ */
+export function getTextExtensions(): Set<string> {
+  return config?.textExtensions || DEFAULT_TEXT_EXTENSIONS;
+}
+
+/**
+ * 获取排除模式
+ */
+export function getExcludePatterns(): string[] {
+  return config?.excludePatterns || DEFAULT_EXCLUDE_PATTERNS;
+}
+
+/**
+ * 获取批次大小
+ */
+export function getBatchSize(): number {
+  return config?.batchSize || 10;
+}
+
+/**
+ * 获取每个 blob 的最大行数
+ */
+export function getMaxLinesPerBlob(): number {
+  return config?.maxLinesPerBlob || 800;
+}

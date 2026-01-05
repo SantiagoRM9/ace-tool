@@ -6,18 +6,18 @@
 
 ## English
 
-MCP server for codebase indexing and semantic search.
+MCP server for codebase indexing, semantic search, and AI prompt enhancement.
 
 ### Installation
 
 ```bash
-npm install -g ace-tool
+npm install -g ace-tool@latest
 ```
 
 Or use directly with npx:
 
 ```bash
-npx ace-tool --base-url <URL> --token <TOKEN>
+npx -y ace-tool@latest --base-url <URL> --token <TOKEN>
 ```
 
 ### Configuration
@@ -65,6 +65,35 @@ Search for relevant code context based on a natural language query.
 - "Where is the function that handles user authentication?"
 - "Find the initialization flow of message queue consumers during startup"
 - "How is the database connected to the application?"
+
+#### enhance_prompt
+
+Enhances user requirements by combining codebase context and conversation history to generate clearer, more specific, and actionable prompts. Opens a Web UI for user review and confirmation.
+
+**Parameters:**
+
+- `project_root_path` (optional): Absolute path to the project root directory (defaults to current working directory)
+- `prompt` (required): The original prompt to enhance
+- `conversation_history` (required): Recent conversation history (5-10 rounds) to help understand user intent
+
+**Trigger Methods:**
+
+1. **Explicit markers** (recommended): Add `-enhance`, `-enhancer`, `-Enhance`, or `-Enhancer` to your message
+   - Example: "新加一个登录页面-Enhancer"
+   - Example: "Add login feature -enhance"
+
+2. **Explicit request**: Ask to "enhance my prompt" or "use enhance_prompt tool"
+
+**Features:**
+
+- Automatic language detection (Chinese input → Chinese output, English input → English output)
+- Interactive Web UI with 4 actions:
+  - **Send Enhanced**: Use the enhanced version
+  - **Use Original**: Continue with original prompt
+  - **Continue Enhancing**: Iteratively refine the prompt
+  - **End Conversation**: Stop the AI conversation
+- Automatic tool name mapping (converts `codebase-retrieval` to `search_context`)
+- 8-minute timeout with automatic fallback to original prompt
 
 ### Project Data
 
@@ -117,18 +146,18 @@ MIT
 
 ## 中文
 
-用于代码库索引和语义搜索的 MCP 服务器。
+用于代码库索引、语义搜索和 AI prompt 增强的 MCP 服务器。
 
 ### 安装
 
 ```bash
-npm install -g ace-tool
+npm install -g ace-tool@latest
 ```
 
 或直接使用 npx：
 
 ```bash
-npx ace-tool --base-url <URL> --token <TOKEN>
+npx -y ace-tool@latest --base-url <URL> --token <TOKEN>
 ```
 
 ### 配置
@@ -176,6 +205,35 @@ npx ace-tool --base-url <URL> --token <TOKEN>
 - "处理用户认证的函数在哪里？"
 - "查找启动时消息队列消费者的初始化流程"
 - "数据库是如何连接到应用程序的？"
+
+#### enhance_prompt
+
+通过结合代码库上下文和对话历史来增强用户需求，生成更清晰、更具体、更可执行的 prompt。打开 Web UI 供用户审查和确认。
+
+**参数：**
+
+- `project_root_path`（可选）：项目根目录的绝对路径（默认使用当前工作目录）
+- `prompt`（必填）：需要增强的原始 prompt
+- `conversation_history`（必填）：最近的对话历史（5-10 轮对话），帮助理解用户意图
+
+**触发方式：**
+
+1. **显式标记**（推荐）：在消息中添加 `-enhance`、`-enhancer`、`-Enhance` 或 `-Enhancer`
+   - 示例："新加一个登录页面-Enhancer"
+   - 示例："Add login feature -enhance"
+
+2. **显式请求**：要求"增强我的 prompt"或"使用 enhance_prompt 工具"
+
+**功能特性：**
+
+- 自动语言检测（中文输入 → 中文输出，英文输入 → 英文输出）
+- 交互式 Web UI，提供 4 个操作：
+  - **发送增强**：使用增强后的版本
+  - **使用原始**：继续使用原始 prompt
+  - **继续增强**：迭代式优化 prompt
+  - **结束对话**：停止 AI 对话
+- 自动工具名称映射（将 `codebase-retrieval` 转换为 `search_context`）
+- 8 分钟超时，自动回退到原始 prompt
 
 ### 项目数据
 
